@@ -10,9 +10,9 @@ from typing import Union, Tuple, Callable, List  # noqa. flake8 #118
 
 _log = logging.getLogger(__name__)
 
-
 pre_reconnect = Signal()
 post_reconnect = Signal()
+
 
 _operror_types = ()  # type: Union[Tuple[type], Tuple]
 _operror_types += (django_db_utils.OperationalError,)
@@ -86,4 +86,9 @@ class DjangoIntegration(AppConfig):
     name = "django_dbconn_retry"
 
     def ready(self) -> None:
+        print("django_dbconn_retry.ready()...")
         monkeypatch_django()
+        print("django.db.backend.prosgresql.base after django_dbconn_retry initialisation..")
+        import inspect
+        source = inspect.getsource(django_db_base.BaseDatabaseWrapper.ensure_connection)
+        print(source)
