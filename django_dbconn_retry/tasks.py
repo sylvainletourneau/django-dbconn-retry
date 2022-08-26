@@ -1,3 +1,5 @@
+from celery.signals import worker_ready
+
 from .apps import monkeypatch_django
 
 
