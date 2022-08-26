@@ -88,7 +88,3 @@ class DjangoIntegration(AppConfig):
     def ready(self) -> None:
         print("django_dbconn_retry.ready()...")
         monkeypatch_django()
-        print("django.db.backend.prosgresql.base after django_dbconn_retry initialisation..")
-        import inspect
-        source = inspect.getsource(django_db_base.BaseDatabaseWrapper.ensure_connection)
-        print(source)
